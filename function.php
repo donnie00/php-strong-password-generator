@@ -1,13 +1,36 @@
 <?php
 
+session_start();
+
 $length = $_GET["length"];
 
-$lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-$uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-$numbers = '012456789';
-$symbols = '!@$?~_-#*&%+=';
+// $lowercase = $_GET["lowercase"];
+// $uppercase = $_GET["uppercase"];
+// $numbers = $_GET["numbers"];
+// $symbols = $_GET["symbols"];
 
-$mergedArray = $lowercaseLetters . $uppercaseLetters . $numbers . $symbols;
+$params = [
+   'lowerCase' => 'abcdefghijklmnopqrstuvwxyz',
+   'upperCase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+   'numbers' => '012456789',
+   'symbols' => '!@$?~_-#*&%+='
+];
+
+$filters = [
+   'lowercase' => $_GET["lowercase"],
+   'uppercase' => $_GET["uppercase"],
+   'numbers' => $_GET["numbers"],
+   'symbols' => $_GET["symbols"],
+];
+
+// $filteredParams = [];
+
+// foreach ($filters as $key => $filter) {
+//    var_dump($filter[$key]);
+//    $filteredParams[] = $params[$filter];
+// };
+
+$mergedArray = implode('', $params);
 
 $passwordGenerator = function ($length, $merged) {
    $password = [];
@@ -19,7 +42,10 @@ $passwordGenerator = function ($length, $merged) {
    return implode('', $password);
 };
 
-echo '<pre>';
+if (isset($length)) {
+   $yourPassword = $passwordGenerator($length, $mergedArray);
 
+   $_SESSION['password'] = $yourPassword;
 
-echo '</pre>';
+   header("Location: passwordPage.php");
+};

@@ -1,5 +1,7 @@
 <?php
 include './function.php';
+
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -16,24 +18,46 @@ include './function.php';
 <body class="text-bg-dark">
    <main class="container py-3">
 
-      <h1>Random Password generator</h1>
+      <h1 class="text-success">Random Password generator</h1>
 
-      <form class="my-3" action="">
-         <label class="form-label" for="length">Insert password length:</label>
-         <input class="form-control" type="number" min="3" name="length" placeholder="Length">
+      <form class="my-3 row" action="">
+         <div class="col">
+            <label class="form-label" for="length">Insert password length:</label>
+            <input class="form-control" type="number" min="3" name="length" placeholder="Length">
+         </div>
+
+         <div class="col">
+            <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="lowercase">
+               <label class="form-check-label" for="lowercase">Lowercase letters</label>
+            </div>
+
+            <div class="fomr-check">
+               <input class="form-check-input" type="checkbox" name="uppercase">
+               <label class="form-check-label" for="lowercase">Uppercase letters</label>
+            </div>
+
+            <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="number">
+               <label class="form-check-label" for="lowercase">Numbers</label>
+            </div>
+
+            <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="symbols">
+               <label class="form-check-label" for="lowercase">Symbols</label>
+            </div>
+         </div>
+
+         <div class="col">
+            <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="charRepetition">
+               <label class="form-check-label" for="charRepetition">
+                  Allow same character repetition?
+               </label>
+            </div>
+         </div>
 
       </form>
-
-      <div class="text-center">
-         <?php if (isset($length) && $length != '') : ?>
-            <h2>Your password is:
-               <small class="text-muted"><?php echo $passwordGenerator($length, $mergedArray) ?? '~' ?></small>
-            <?php else : ?>
-               <h2>Nessuna password da mostrare, inserisci la lunghezza per generarla!</h2>
-            <?php endif ?>
-            </h2>
-      </div>
-
    </main>
 </body>
 
