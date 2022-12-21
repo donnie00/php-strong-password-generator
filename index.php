@@ -1,30 +1,5 @@
 <?php
-
-$length = $_GET["length"];
-
-$lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-$uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-$numbers = '012456789';
-$symbols = '!@$?~_-#*&%+=';
-
-$mergedArray = $lowercaseLetters . $uppercaseLetters . $numbers . $symbols;
-
-$passwordGenerator = function ($length, $merged) {
-   $password = [];
-   while (count($password) < $length) {
-      $index = rand(0, strlen($merged) - 1);
-      $password[] = $merged[$index];
-   }
-
-   return implode('', $password);
-};
-
-echo '<pre>';
-
-
-echo '</pre>';
-
-
+include './function.php';
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +25,13 @@ echo '</pre>';
       </form>
 
       <div class="text-center">
-         <h2>Your password is:
-            <small class="text-muted"><?php echo $passwordGenerator($length, $mergedArray) ?></small>
-         </h2>
+         <?php if (isset($length) && $length != '') : ?>
+            <h2>Your password is:
+               <small class="text-muted"><?php echo $passwordGenerator($length, $mergedArray) ?? '~' ?></small>
+            <?php else : ?>
+               <h2>Nessuna password da mostrare, inserisci la lunghezza per generarla!</h2>
+            <?php endif ?>
+            </h2>
       </div>
 
    </main>
