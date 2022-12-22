@@ -4,33 +4,38 @@ session_start();
 
 $length = $_GET["length"];
 
-// $lowercase = $_GET["lowercase"];
-// $uppercase = $_GET["uppercase"];
-// $numbers = $_GET["numbers"];
-// $symbols = $_GET["symbols"];
-
 $params = [
-   'lowerCase' => 'abcdefghijklmnopqrstuvwxyz',
-   'upperCase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-   'numbers' => '012456789',
-   'symbols' => '!@$?~_-#*&%+='
+   [
+      'name' => 'lowercase',
+      'value' => 'abcdefghijklmnopqrstuvwxyz',
+      'toUse' => isset($_GET["lowercase"])
+   ],
+   [
+      'name' => 'uppercase',
+      'value' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      'toUse' => isset($_GET["uppercase"])
+   ],
+   [
+      'name' => 'numbers',
+      'value' => '012456789',
+      'toUse' => isset($_GET["numbers"])
+   ],
+   [
+      'name' => 'symbols',
+      'value' => '!@$?~_-#*&%+=',
+      'toUse' => isset($_GET["symbols"])
+   ]
 ];
 
-$filters = [
-   'lowercase' => $_GET["lowercase"],
-   'uppercase' => $_GET["uppercase"],
-   'numbers' => $_GET["numbers"],
-   'symbols' => $_GET["symbols"],
-];
+$filteredParams = [];
 
-// $filteredParams = [];
+foreach ($params as $param) {
+   if ($param['toUse']) {
+      $filteredParams[] = $param['value'];
+   }
+};
 
-// foreach ($filters as $key => $filter) {
-//    var_dump($filter[$key]);
-//    $filteredParams[] = $params[$filter];
-// };
-
-$mergedArray = implode('', $params);
+$mergedArray = implode('', $filteredParams);
 
 $passwordGenerator = function ($length, $merged) {
    $password = [];

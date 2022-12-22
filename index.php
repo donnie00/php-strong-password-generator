@@ -1,7 +1,5 @@
 <?php
 include './function.php';
-
-var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@ var_dump($_SESSION);
             </div>
 
             <div class="form-check">
-               <input class="form-check-input" type="checkbox" name="number">
+               <input class="form-check-input" type="checkbox" name="numbers">
                <label class="form-check-label" for="lowercase">Numbers</label>
             </div>
 
